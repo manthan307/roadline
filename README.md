@@ -38,3 +38,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Color plate
 
 [https://colorhunt.co/palette/f8f3d9ebe5c2b9b28a504b38]
+
+## SVGS
+
+[https://www.svgrepo.com/svg/521010/truck-speed]
+[https://www.svgrepo.com/svg/314134/handshake]
+[https://www.svgrepo.com/svg/502881/update]

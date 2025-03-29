@@ -5,7 +5,7 @@ import Truck from "@/public/truck.svg";
 const Nav = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for mobile menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,21 +13,17 @@ const Nav = () => {
         document.documentElement.scrollTop || document.body.scrollTop;
 
       if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        // Scrolling down
         setIsVisible(false);
       } else {
-        // Scrolling up
         setIsVisible(true);
       }
 
       setLastScrollY(currentScrollY);
     };
 
-    // Add scroll event listener
     document.addEventListener("scroll", handleScroll);
 
     return () => {
-      // Cleanup scroll event listener
       document.removeEventListener("scroll", handleScroll);
     };
   }, [lastScrollY]);
@@ -35,13 +31,22 @@ const Nav = () => {
   const navoptions = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
+    { name: "Pricing", href: "#pricing" },
+    { name: "Contact Us", href: "#contact" },
   ];
+
+  const handleScrollToSection = (id: string) => {
+    const section = document.querySelector(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      setIsMenuOpen(false); // Close the menu if it's open
+    }
+  };
 
   return (
     <nav
       className={`fixed inset-x-0 mx-auto top-5 rounded-2xl w-11/12 p-2 bg-[#fff] text-foreground shadow-xl z-30 transition-transform duration-300 ${
-        isVisible ? "translate-y-0" : "-translate-y-full"
+        isVisible ? "translate-y-0" : "-translate-y-96"
       }`}
     >
       <div className="flex justify-between items-center px-4 py-2">
@@ -49,16 +54,19 @@ const Nav = () => {
         <ul className="hidden sm:block">
           {navoptions.map((navoption, index) => (
             <li key={index} className="inline-block mx-4 hover:border-b">
-              <a href={navoption.href} className="hover:text-accent">
+              <button
+                onClick={() => handleScrollToSection(navoption.href)}
+                className="hover:text-accent"
+              >
                 {navoption.name}
-              </a>
+              </button>
             </li>
           ))}
         </ul>
-        <span className="w-3"></span>
+        <span className="hidden md:block">{/*for centering the options*/}</span>
         <button
           className="w-8 h-8 text-center md:hidden p-1 hover:border hover:border-[#ccc] focus:border focus:border-[#ccc] rounded-sm"
-          onClick={() => setIsMenuOpen(!isMenuOpen)} // Toggle menu
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -76,22 +84,22 @@ const Nav = () => {
           </svg>
         </button>
       </div>
+
       {/* Mobile Menu */}
       <div
-        className={`w-full bg-[#fff] overflow-hidden ${
-          isMenuOpen ? "h-auto" : "h-0"
+        className={`md:hidden absolute rounded-b-2xl top-full left-0 w-full bg-[#fff] shadow-md transition-transform duration-300 ${
+          isMenuOpen ? "-translate-y-3" : "-translate-y-96"
         }`}
       >
         <ul className="flex flex-col items-center py-4">
           {navoptions.map((navoption, index) => (
             <li key={index} className="py-2">
-              <a
-                href={navoption.href}
+              <button
+                onClick={() => handleScrollToSection(navoption.href)}
                 className="text-lg hover:text-accent"
-                onClick={() => setIsMenuOpen(false)} // Close menu on click
               >
                 {navoption.name}
-              </a>
+              </button>
             </li>
           ))}
         </ul>
