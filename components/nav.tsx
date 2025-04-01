@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Truck from "@/public/truck.svg";
+import Link from "next/link";
 
 const Nav = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -50,7 +51,9 @@ const Nav = () => {
       }`}
     >
       <div className="flex justify-between items-center px-4 py-2">
-        <Truck className="w-8 h-8" />
+        <Link href={"/"}>
+          <Truck className="w-8 h-8 mr-2" />
+        </Link>
         <ul className="hidden sm:block">
           {navoptions.map((navoption, index) => (
             <li key={index} className="inline-block mx-4 hover:border-b">
@@ -63,7 +66,12 @@ const Nav = () => {
             </li>
           ))}
         </ul>
-        <span className="hidden md:block">{/*for centering the options*/}</span>
+        <Link
+          href="/"
+          className="text-accent border border-accent rounded-lg p-2 hidden md:block"
+        >
+          Track Delivery
+        </Link>
         <button
           className="w-8 h-8 text-center md:hidden p-1 hover:border hover:border-[#ccc] focus:border focus:border-[#ccc] rounded-sm"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -102,6 +110,11 @@ const Nav = () => {
               </button>
             </li>
           ))}
+          <li className="py-2">
+            <Link href={"/"} className="text-lg hover:text-accent">
+              Track Delivery
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>

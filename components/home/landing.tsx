@@ -1,50 +1,72 @@
 export default function LandingSection() {
   return (
     <div
-      className="grid grid-flow-row items-start min-min-h-screen font-[family-name:var(--font-geist-sans)]"
+      className="relative grid grid-flow-row items-start min-h-screen font-[family-name:var(--font-geist-sans)] overflow-hidden"
       id="home"
     >
-      <div className="flex flex-row w-full bg text-foreground items-center justify-center min-h-screen">
-        <div className="text-wrap text-start md:p-10 p-5 z-20">
-          <h1 className="text-6xl font-bold">Transport</h1>
-          <h1 className="text-6xl font-bold flex flex-wrap">
-            <span className="bg-accent text-background rounded-2xl my-2 p-1 mr-1">
+      <div className="flex flex-col md:flex-row w-full bg text-foreground items-center justify-center min-h-screen px-4 md:px-10">
+        <div className="text-wrap text-start z-20 max-w-3xl mx-auto md:mx-0">
+          {/* Title */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight md:leading-normal break-words">
+            Transport{" "}
+            <span className="inline-block bg-accent text-background rounded-2xl px-3 py-1 my-1">
               Anything
             </span>
-            ,
-            <span className="bg-white text-accent rounded-2xl my-2 p-1 ml-1">
+            ,{" "}
+            <span className="inline-block bg-white text-accent rounded-2xl px-3 py-1 my-1">
               Anywhere
-            </span>
+            </span>{" "}
+            <span className="block">in Gujarat.</span>
           </h1>
-          <h1 className="text-6xl font-bold">in Gujarat.</h1>
-          <div>
-            <button className="bg-accent text-background rounded-lg p-2 mt-5">
+
+          {/* Description */}
+          <p className="mt-5 text-base sm:text-lg md:text-xl text-gray-600 max-w-xl leading-relaxed">
+            Reliable and fast transportation services tailored to your needs.
+            Get started today!
+          </p>
+
+          {/* Buttons */}
+          <div className="mt-8 flex flex-col sm:flex-row gap-4">
+            <a
+              href="#pricing"
+              className="w-full sm:w-auto text-center bg-accent text-background font-medium text-lg rounded-lg px-6 py-3 shadow-md hover:bg-white hover:text-accent hover:border hover:border-accent transition duration-200"
+            >
               Pricing Calculator
-            </button>
-            <button className="bg-white text-accent rounded-lg p-2 mt-5 ml-5">
+            </a>
+            <a
+              href="#contact"
+              className="w-full sm:w-auto text-center bg-white text-accent font-medium text-lg rounded-lg px-6 py-3 shadow-md border border-accent hover:bg-accent hover:text-white transition duration-200"
+            >
               Contact Us
-            </button>
+            </a>
           </div>
         </div>
       </div>
+
+      {/* Wave SVG - Show on all screens with adjusted size */}
       <svg
         id="wave"
         style={{ transform: "rotate(0deg)", transition: "0.3s" }}
-        viewBox="0 0 1440 490"
+        viewBox="0 0 1440 320"
         version="1.1"
-        className="absolute bottom-0 -z-10 hidden md:block"
+        className="absolute bottom-0 -z-10 w-full h-[40vh] min-w-[1000px]"
         xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
       >
         <defs>
           <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
-            <stop stopColor="rgba(185, 178, 138, 1)" offset="0%"></stop>
-            <stop stopColor="rgba(235, 229, 194, 1)" offset="100%"></stop>
+            <stop stopColor="rgba(185, 178, 138, 0.95)" offset="0%"></stop>
+            <stop stopColor="rgba(235, 229, 194, 0.8)" offset="100%"></stop>
           </linearGradient>
         </defs>
         <path
-          style={{ transform: "translate(0, 0px)", opacity: 1 }}
+          style={{
+            transform: "translate(0, 0px)",
+            opacity: 0.9,
+            filter: "drop-shadow(0 -10px 10px rgba(0,0,0,0.1))",
+          }}
           fill="url(#sw-gradient-0)"
-          d="M0,196L30,196C60,196,120,196,180,196C240,196,300,196,360,187.8C420,180,480,163,540,163.3C600,163,660,180,720,204.2C780,229,840,261,900,294C960,327,1020,359,1080,367.5C1140,376,1200,359,1260,302.2C1320,245,1380,147,1440,155.2C1500,163,1560,278,1620,310.3C1680,343,1740,294,1800,261.3C1860,229,1920,212,1980,196C2040,180,2100,163,2160,155.2C2220,147,2280,147,2340,196C2400,245,2460,343,2520,367.5C2580,392,2640,343,2700,302.2C2760,261,2820,229,2880,196C2940,163,3000,131,3060,155.2C3120,180,3180,261,3240,294C3300,327,3360,310,3420,285.8C3480,261,3540,229,3600,196C3660,163,3720,131,3780,155.2C3840,180,3900,261,3960,261.3C4020,261,4080,180,4140,130.7C4200,82,4260,65,4290,57.2L4320,49L4320,490L4290,490C4260,490,4200,490,4140,490C4080,490,4020,490,3960,490C3900,490,3840,490,3780,490C3720,490,3660,490,3600,490C3540,490,3480,490,3420,490C3360,490,3300,490,3240,490C3180,490,3120,490,3060,490C3000,490,2940,490,2880,490C2820,490,2760,490,2700,490C2640,490,2580,490,2520,490C2460,490,2400,490,2340,490C2280,490,2220,490,2160,490C2100,490,2040,490,1980,490C1920,490,1860,490,1800,490C1740,490,1680,490,1620,490C1560,490,1500,490,1440,490C1380,490,1320,490,1260,490C1200,490,1140,490,1080,490C1020,490,960,490,900,490C840,490,780,490,720,490C660,490,600,490,540,490C480,490,420,490,360,490C300,490,240,490,180,490C120,490,60,490,30,490L0,490Z"
+          d="M0,128L48,144C96,160,192,192,288,197.3C384,203,480,181,576,165.3C672,149,768,139,864,154.7C960,171,1056,213,1152,218.7C1248,224,1344,192,1440,181.3C1536,171,1632,181,1728,192C1824,203,1920,213,2016,202.7C2112,192,2208,160,2304,138.7C2400,117,2496,107,2592,101.3C2688,96,2784,96,2880,85.3C2976,75,3072,53,3168,69.3C3264,85,3360,139,3456,138.7C3552,139,3648,85,3744,69.3C3840,53,3936,75,4032,106.7C4128,139,4224,181,4320,197.3C4416,213,4512,203,4608,170.7C4704,139,4800,85,4896,74.7C4992,64,5088,96,5184,122.7C5280,149,5376,171,5472,165.3C5568,160,5664,128,5760,133.3C5856,139,5952,181,6048,197.3C6144,213,6240,203,6336,170.7C6432,139,6528,85,6624,74.7C6720,64,6816,96,6864,112L6912,128L6912,320L6864,320C6816,320,6720,320,6624,320C6528,320,6432,320,6336,320C6240,320,6144,320,6048,320C5952,320,5856,320,5760,320C5664,320,5568,320,5472,320C5376,320,5280,320,5184,320C5088,320,4992,320,4896,320C4800,320,4704,320,4608,320C4512,320,4416,320,4320,320C4224,320,4128,320,4032,320C3936,320,3840,320,3744,320C3648,320,3552,320,3456,320C3360,320,3264,320,3168,320C3072,320,2976,320,2880,320C2784,320,2688,320,2592,320C2496,320,2400,320,2304,320C2208,320,2112,320,2016,320C1920,320,1824,320,1728,320C1632,320,1536,320,1440,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
         ></path>
       </svg>
     </div>
