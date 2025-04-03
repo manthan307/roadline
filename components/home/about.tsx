@@ -35,9 +35,9 @@ export default function About() {
             <div className=" mb-4 flex justify-center items-center">
               <About.icon className="w-16 h-auto" />
             </div>
-            <h3 className="text-2xl font-semibold text-center text-gray-800 mb-2 group-hover:text-tertiary transition-colors duration-300">
+            <h1 className="text-2xl font-semibold text-center text-gray-800 mb-2 group-hover:text-tertiary transition-colors duration-300">
               {About.title}
-            </h3>
+            </h1>
             <p className="text-gray-600 text-center">{About.description}</p>
           </div>
         ))}

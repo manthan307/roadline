@@ -28,17 +28,17 @@ export default function LandingSection() {
           {/* Buttons */}
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <a
-              href="#pricing"
+              href="#contact"
               className="w-full sm:w-auto text-center bg-accent text-background font-medium text-lg rounded-lg px-6 py-3 shadow-md hover:bg-white hover:text-accent hover:border hover:border-accent transition duration-200"
             >
-              Pricing Calculator
+              Contact Us
             </a>
-            <a
+            {/* <a
               href="#contact"
               className="w-full sm:w-auto text-center bg-white text-accent font-medium text-lg rounded-lg px-6 py-3 shadow-md border border-accent hover:bg-accent hover:text-white transition duration-200"
             >
               Contact Us
-            </a>
+            </a> */}
           </div>
         </div>
       </div>

@@ -1,17 +1,48 @@
 "use client";
 
 import { useState } from "react";
+import supabase from "@/supabase"; // Ensure you have the correct path to your Supabase client
 
 export default function ContactUs() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ name, email, mobile, message });
-    // Add your form submission logic here
+    setLoading(true);
+    setSuccess(false);
+
+    try {
+      const { data, error } = await supabase.from("contact_us").insert([
+        {
+          name,
+          email,
+          mobile,
+          message,
+        },
+      ]);
+
+      if (error) {
+        console.error("Error inserting data:", error.message);
+        alert("Failed to send your message. Please try again.");
+      } else {
+        console.log("Data inserted successfully:", data);
+        setSuccess(true);
+        setName("");
+        setEmail("");
+        setMobile("");
+        setMessage("");
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      alert("An unexpected error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -25,7 +56,6 @@ export default function ContactUs() {
             Contact Us
           </h1>
           <p className="text-center">
-            {/* Don't change the below line*/}
             {
               "We'd love to hear from you! Fill out the form below and we'll get back to you as soon as possible."
             }
@@ -39,6 +69,8 @@ export default function ContactUs() {
             <input
               type="text"
               id="name"
+              required
+              minLength={3}
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your name"
@@ -53,6 +85,7 @@ export default function ContactUs() {
             </label>
             <input
               type="email"
+              required
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -67,10 +100,16 @@ export default function ContactUs() {
               Your Mobile Number
             </label>
             <input
-              type="tel"
+              type="text"
+              maxLength={10}
+              minLength={10}
               id="mobile"
+              required
               value={mobile}
-              onChange={(e) => setMobile(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value.replace(/[^0-9]/g, "");
+                setMobile(value);
+              }}
               placeholder="Enter your mobile number"
               className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-accent"
             />
@@ -79,7 +118,7 @@ export default function ContactUs() {
           {/* Message Input */}
           <div className="flex flex-col">
             <label htmlFor="message" className="font-medium">
-              Your Message
+              Your Message <span className="text-gray-500">(optional)</span>
             </label>
             <textarea
               id="message"
@@ -95,9 +134,13 @@ export default function ContactUs() {
           <button
             type="submit"
             className="w-full bg-accent text-primary py-3 rounded-lg hover:bg-white hover:text-accent hover:border hover:border-accent transition duration-200"
+            disabled={loading}
           >
-            Send Message
+            {loading ? "Loading..." : "Contact Us"}
           </button>
+
+          {/* Success Message */}
+          {success && <p className="text-green-600 text-center mt-4">Done!</p>}
         </form>
       </div>
     </div>

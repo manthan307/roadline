@@ -2,11 +2,15 @@
 import { useState, useEffect } from "react";
 import Truck from "@/public/truck.svg";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 const Nav = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,15 +36,23 @@ const Nav = () => {
   const navoptions = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
-    { name: "Pricing", href: "#pricing" },
     { name: "Contact Us", href: "#contact" },
   ];
 
   const handleScrollToSection = (id: string) => {
-    const section = document.querySelector(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-      setIsMenuOpen(false); // Close the menu if it's open
+    // Check if the current path is the root path
+    if (pathname === "/") {
+      const section = document.querySelector(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+        setIsMenuOpen(false); // Close the menu if it's open
+      }
+    } else {
+      // router.push("/"); // Navigate to the root path
+      router.replace("/" + id); // Replace the URL with the section ID
+      // setTimeout(() => {
+      //   handleScrollToSection(id); // Call the function again after navigation
+      // }, 100);
     }
   };
 
@@ -51,7 +63,7 @@ const Nav = () => {
       }`}
     >
       <div className="flex justify-between items-center px-4 py-2">
-        <Link href={"/"}>
+        <Link href={"/"} aria-label="Logo">
           <Truck className="w-8 h-8 mr-2" />
         </Link>
         <ul className="hidden sm:block">
@@ -67,7 +79,7 @@ const Nav = () => {
           ))}
         </ul>
         <Link
-          href="/"
+          href="/track"
           className="text-accent border border-accent rounded-lg p-2 hidden md:block"
         >
           Track Delivery
@@ -75,6 +87,7 @@ const Nav = () => {
         <button
           className="w-8 h-8 text-center md:hidden p-1 hover:border hover:border-[#ccc] focus:border focus:border-[#ccc] rounded-sm"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Menu"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +124,7 @@ const Nav = () => {
             </li>
           ))}
           <li className="py-2">
-            <Link href={"/"} className="text-lg hover:text-accent">
+            <Link href={"/track"} className="text-lg hover:text-accent">
               Track Delivery
             </Link>
           </li>
