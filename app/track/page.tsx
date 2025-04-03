@@ -1,5 +1,7 @@
 "use client";
 
+import Footer from "@/components/footer";
+import Nav from "@/components/nav";
 import { useState } from "react";
 
 export default function Track() {
@@ -34,6 +36,7 @@ export default function Track() {
 
   return (
     <>
+      <Nav />
       <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4 py-6">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center">
           Track Your Delivery
@@ -85,6 +88,7 @@ export default function Track() {
           </div>
         )}
       </div>
+      <Footer />
     </>
   );
 }
