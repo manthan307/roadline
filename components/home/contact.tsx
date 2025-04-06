@@ -1,7 +1,7 @@
 "use client";
 
+import { createClient } from "@/supabase/client"; // Ensure you have the correct path to your Supabase client
 import { useState } from "react";
-import supabase from "@/supabase"; // Ensure you have the correct path to your Supabase client
 
 export default function ContactUs() {
   const [name, setName] = useState("");
@@ -10,6 +10,8 @@ export default function ContactUs() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  const supabase = createClient(); // Initialize Supabase client
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

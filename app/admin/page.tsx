@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import supabase from "@/supabase";
+import { createClient } from "@/supabase/client";
 
 export default function AdminPage() {
   const [email, setEmail] = useState("");
@@ -10,6 +10,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+  const supabase = createClient(); // initialize Supabase client
 
   // Check if the user is already logged in
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function AdminPage() {
     };
 
     checkSession();
-  }, [router]);
+  }, [router, supabase.auth]);
 
   // Handle Email Login
   const handleLogin = async (e: React.FormEvent) => {

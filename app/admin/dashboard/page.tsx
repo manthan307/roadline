@@ -1,11 +1,25 @@
 "use client";
 
+import { createClient } from "@/supabase/client";
 import { useRouter } from "next/navigation";
-import supabase from "@/supabase";
+import { useEffect } from "react";
 
 export default function Dashboard() {
   const router = useRouter();
+  const supabase = createClient(); // initialize Supabase client
 
+  // Check if the user is already logged in
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      if (!data.session) {
+        // Redirect to the dashboard if a session exists
+        router.push("/admin");
+      }
+    };
+
+    checkSession();
+  }, [router, supabase.auth]);
   // Handle Logout
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
