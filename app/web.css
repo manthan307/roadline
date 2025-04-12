@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8f3d9;
+  --foreground: #171717;
+  --primary: #f8f3d9;
+  --secondary: #ebe5c2;
+  --tertiary: #b9b28a;
+  --accent: #504b38;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+  --color-accent: var(--accent);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bg {
+  background-color: var(--background);
+  opacity: 0.8;
+  background-image: radial-gradient(var(--accent) 0.5px, transparent 0.5px),
+    radial-gradient(var(--accent) 0.5px, var(--background) 0.5px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+.circle_bg {
+  background-color: #f8f3d9;
+  opacity: 0.8;
+  background: radial-gradient(
+      circle,
+      transparent 20%,
+      #f8f3d9 20%,
+      #f8f3d9 80%,
+      transparent 80%,
+      transparent
+    ),
+    radial-gradient(
+        circle,
+        transparent 20%,
+        #f8f3d9 20%,
+        #f8f3d9 80%,
+        transparent 80%,
+        transparent
+      )
+      25px 25px,
+    linear-gradient(#504b38 2px, transparent 2px) 0 -1px,
+    linear-gradient(90deg, #504b38 2px, #f8f3d9 2px) -1px 0;
+  background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
+}

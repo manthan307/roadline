@@ -1,3 +1,4 @@
+import "./web.css";
 import Footer from "@/components/footer";
 import About from "@/components/home/about";
 import ContactUs from "@/components/home/contact";

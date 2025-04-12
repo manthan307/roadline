@@ -83,7 +83,7 @@ export default function AdminPage() {
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-between h-screen">
-      <div className="hidden md:block w-1/2 h-full relative circle_bg" />
+      <div className="hidden md:block w-1/2 h-full relative admin_bg" />
 
       {/* Centered Content */}
       <div className="h-full w-full md:w-1/2 flex items-center justify-center bg-white p-8">

@@ -1,5 +1,6 @@
 "use client";
 
+import "../web.css";
 import Footer from "@/components/footer";
 import Nav from "@/components/nav";
 import { useState } from "react";
