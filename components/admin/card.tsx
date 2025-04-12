@@ -1,4 +1,4 @@
-import { TrendingUpIcon } from "lucide-react";
+import { TrendingDownIcon, TrendingUpIcon } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import {
@@ -12,19 +12,18 @@ import { Skeleton } from "../ui/skeleton";
 
 export function SectionCards({
   visit,
-  growth,
-  loading,
+  growth = 0,
 }: {
-  visit: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  visit: any;
   growth: number;
-  loading: boolean;
 }) {
   return (
     <div className="*:data-[slot=card]:shadow-xs @xl/main:grid-cols-2 @5xl/main:grid-cols-4 grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card lg:px-6">
       <Card className="@container/card">
         <CardHeader className="relative">
           <CardDescription>Total Revenue</CardDescription>
-          {loading ? (
+          {!visit ? (
             <Skeleton className="h-7 w-28 rounded-md" />
           ) : (
             <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
@@ -32,7 +31,7 @@ export function SectionCards({
             </CardTitle>
           )}
           <div className="absolute right-4 top-4">
-            {loading ? (
+            {!visit ? (
               <Skeleton className="h-5 w-16 rounded-md" />
             ) : (
               <Badge
@@ -46,7 +45,7 @@ export function SectionCards({
           </div>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1 text-sm">
-          {loading ? (
+          {!visit ? (
             <>
               <Skeleton className="h-4 w-32 rounded-md" />
               <Skeleton className="h-4 w-48 rounded-md" />
@@ -67,40 +66,52 @@ export function SectionCards({
       <Card className="@container/card">
         <CardHeader className="relative">
           <CardDescription>Total Visits</CardDescription>
-          {loading ? (
+          {!visit ? (
             <Skeleton className="h-7 w-28 rounded-md" />
           ) : (
             <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-              {visit}
+              {visit?.count || 0}
             </CardTitle>
           )}
           <div className="absolute right-4 top-4">
-            {loading ? (
+            {!visit ? (
               <Skeleton className="h-5 w-16 rounded-md" />
             ) : (
               <Badge
                 variant="outline"
                 className="flex gap-1 rounded-lg text-xs"
               >
-                <TrendingUpIcon className="size-3" />
-                +12.5%
+                {growth >= 0 ? (
+                  <TrendingUpIcon className="size-3" />
+                ) : (
+                  <TrendingDownIcon className="size-3" />
+                )}
+                {growth} %
               </Badge>
             )}
           </div>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1 text-sm">
-          {loading ? (
+          {!visit ? (
             <>
               <Skeleton className="h-4 w-32 rounded-md" />
               <Skeleton className="h-4 w-48 rounded-md" />
             </>
           ) : (
             <>
-              <div className="line-clamp-1 flex gap-2 font-medium">
-                Trending up this month <TrendingUpIcon className="size-4" />
-              </div>
+              {growth >= 0 ? (
+                <div className="line-clamp-1 flex gap-2 font-medium">
+                  Trending up this weak <TrendingUpIcon className="size-4" />
+                </div>
+              ) : (
+                <div className="line-clamp-1 flex gap-2 font-medium">
+                  Trending down this weak{" "}
+                  <TrendingDownIcon className="size-4" />
+                </div>
+              )}
+
               <div className="text-muted-foreground">
-                Visitors for the last 1 months
+                Visitors for this week
               </div>
             </>
           )}
@@ -110,7 +121,7 @@ export function SectionCards({
       <Card className="@container/card">
         <CardHeader className="relative">
           <CardDescription>New Customers</CardDescription>
-          {loading ? (
+          {!visit ? (
             <Skeleton className="h-7 w-28 rounded-md" />
           ) : (
             <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
@@ -118,7 +129,7 @@ export function SectionCards({
             </CardTitle>
           )}
           <div className="absolute right-4 top-4">
-            {loading ? (
+            {!visit ? (
               <Skeleton className="h-5 w-16 rounded-md" />
             ) : (
               <Badge
@@ -132,7 +143,7 @@ export function SectionCards({
           </div>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1 text-sm">
-          {loading ? (
+          {!visit ? (
             <>
               <Skeleton className="h-4 w-32 rounded-md" />
               <Skeleton className="h-4 w-48 rounded-md" />
@@ -153,7 +164,7 @@ export function SectionCards({
       <Card className="@container/card">
         <CardHeader className="relative">
           <CardDescription>Growth Rate</CardDescription>
-          {loading ? (
+          {!visit ? (
             <Skeleton className="h-7 w-28 rounded-md" />
           ) : (
             <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
@@ -163,13 +174,13 @@ export function SectionCards({
                   className="flex gap-1 rounded-lg text-xs"
                 >
                   <TrendingUpIcon className="size-3" />
-                  {growth} %
+                  40 %
                 </Badge>
               </div>
             </CardTitle>
           )}
           {/* <div className="absolute right-4 top-4">
-            {loading ? (
+            {!visit ? (
               <Skeleton className="h-5 w-16 rounded-md" />
             ) : (
               <Badge
@@ -183,7 +194,7 @@ export function SectionCards({
           </div> */}
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1 text-sm">
-          {loading ? (
+          {!visit ? (
             <>
               <Skeleton className="h-4 w-32 rounded-md" />
               <Skeleton className="h-4 w-48 rounded-md" />

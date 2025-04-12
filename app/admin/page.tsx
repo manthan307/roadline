@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/supabase/client";
+import "../web.css";
 
 export default function AdminPage() {
   const [email, setEmail] = useState("");
@@ -49,8 +50,6 @@ export default function AdminPage() {
         setError("Invalid email or password. Please try again.");
         return;
       }
-
-      console.log("User signed in:", data);
 
       const { data: profiles, error: profilesError } = await supabase
         .from("profiles")

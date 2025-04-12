@@ -13,9 +13,10 @@ export default function Dashboard() {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [visits, setVisits] = useState<number | null>(null);
-  const [growth, setGrowth] = useState<number | null>(null);
+  const [visitData, setVisitData] = useState<
+    { result?: { [key: string]: unknown }[] } | undefined
+  >(undefined);
+  const [growthRate, setGrowthRate] = useState<number>(0);
 
   // Check if the user is already logged in
   useEffect(() => {
@@ -34,40 +35,25 @@ export default function Dashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
-      const [visitsData, growthData, visitGrowth] = await Promise.all([
+      const [visitsData, growth] = await Promise.all([
         fetchInsightById("905798"),
-        fetchInsightById("916716"),
-        fetchInsightById("917620"),
+        fetchInsightById("921828"),
       ]);
-      console.log(visitsData, growthData, visitGrowth);
-      const growthPercentage = "";
-      setVisits(visitsData?.result?.[0]?.count ?? 0);
-      setGrowth(growthData?.result?.[0]?.value ?? 0);
-      setLoading(false);
+
+      setGrowthRate(growth.result[0][2]);
+      setVisitData(visitsData?.result?.[0]);
     };
 
     if (user !== null) {
       fetchData();
-      setLoading(false);
     }
-
-    console.log(visits, growth);
   }, [user]);
-
-  useEffect(() => {
-    console.log(visits, growth);
-  }, [visits, growth]);
 
   return (
     <>
-      <SectionCards
-        visit={visits ?? 0}
-        growth={growth ?? 0}
-        loading={loading}
-      />
+      <SectionCards visit={visitData} growth={growthRate} />
       <div className="px-4 lg:px-6">
-        <ChartAreaInteractive />
+        <ChartAreaInteractive visit={visitData} />
       </div>
     </>
   );
