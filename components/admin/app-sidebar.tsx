@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox } from "lucide-react";
+import { Calendar, Home, Inbox, UserCircle } from "lucide-react";
 
 import {
   Sidebar,
@@ -34,11 +34,11 @@ const items = [
     url: "/admin/dashboard/calendar",
     icon: Calendar,
   },
-  // {
-  //   title: "Settings",
-  //   url: "#",
-  //   icon: Settings,
-  // },
+  {
+    title: "Customers",
+    url: "/admin/dashboard/customers",
+    icon: UserCircle,
+  },
 ];
 
 export function AppSidebar() {

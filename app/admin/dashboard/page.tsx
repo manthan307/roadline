@@ -16,7 +16,7 @@ export default function Dashboard() {
   const [visitData, setVisitData] = useState<
     { result?: { [key: string]: unknown }[] } | undefined
   >(undefined);
-  const [growthRate, setGrowthRate] = useState<number>(0);
+  const [growthRate, setGrowthRate] = useState();
 
   // Check if the user is already logged in
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function Dashboard() {
         fetchInsightById("921828"),
       ]);
 
-      setGrowthRate(growth.result[0][2]);
+      setGrowthRate(growth);
       setVisitData(visitsData?.result?.[0]);
     };
 
@@ -51,7 +51,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <SectionCards visit={visitData} growth={growthRate} />
+      <SectionCards growth={growthRate} />
       <div className="px-4 lg:px-6">
         <ChartAreaInteractive visit={visitData} />
       </div>

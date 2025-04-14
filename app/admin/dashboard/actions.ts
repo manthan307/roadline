@@ -9,7 +9,7 @@ export async function fetchInsightById(short_id: string) {
       headers: {
         Authorization: `Bearer ${process.env.POSTHOG_API_KEY}`,
       },
-      next: { revalidate: 600 },
+      next: { revalidate: 10 },
       cache: "force-cache",
     }
   );
